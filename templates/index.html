@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            width: 420px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 15px;
+            outline: none;
+            resize: none;
+        }
+        textarea:focus {
+            border-color: #007bff;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        .real {
+            color: #0c8b36;
+            background: #d6f5dd;
+        }
+        .fake {
+            color: #b90000;
+            background: #ffd1d1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📰 Fake News Detector</h2>
+
+    <form action="/predict" method="post">
+        <textarea name="news" placeholder="Enter news text here..." required></textarea>
+        <button type="submit">Check News</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result {% if 'FAKE' in prediction_text %}fake{% else %}real{% endif %}">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
